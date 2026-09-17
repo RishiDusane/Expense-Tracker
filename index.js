@@ -7,6 +7,14 @@ const expenseList = document.querySelector("#expense-list");
 let expenses = [];
 let editingId = null;
 
+function createActionButton(label, action) {
+	const button = document.createElement("button");
+	button.type = "button";
+	button.textContent = label;
+	button.addEventListener("click", action);
+	return button;
+}
+
 function renderExpenses() {
 	expenseList.replaceChildren();
 
@@ -14,17 +22,10 @@ function renderExpenses() {
 		const item = document.createElement("li");
 		item.append(`${expense.amount} - ${expense.category} - ${expense.description} `);
 
-		const editButton = document.createElement("button");
-		editButton.type = "button";
-		editButton.textContent = "Edit Expense";
-		editButton.addEventListener("click", () => startEditing(expense.id));
-
-		const deleteButton = document.createElement("button");
-		deleteButton.type = "button";
-		deleteButton.textContent = "Delete Expense";
-		deleteButton.addEventListener("click", () => deleteExpense(expense.id));
-
-		item.append(deleteButton, editButton);
+		item.append(
+			createActionButton("Delete Expense", () => deleteExpense(expense.id)),
+			createActionButton("Edit Expense", () => startEditing(expense.id))
+		);
 		expenseList.append(item);
 	});
 }
@@ -59,11 +60,9 @@ submitButton.addEventListener("click", () => {
 		category: categoryInput.value
 	};
 
-	if (editingId === null) {
-		expenses.push({ id: crypto.randomUUID(), ...expenseData });
-	} else {
-		expenses = expenses.map((expense) => expense.id === editingId ? { ...expense, ...expenseData } : expense);
-	}
+	expenses = editingId === null
+		? [...expenses, { id: crypto.randomUUID(), ...expenseData }]
+		: expenses.map((expense) => expense.id === editingId ? { ...expense, ...expenseData } : expense);
 
 	renderExpenses();
 	clearInputs();
