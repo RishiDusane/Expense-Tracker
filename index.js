@@ -4,13 +4,8 @@ const categoryInput = document.querySelector("#category");
 const submitButton = document.querySelector("#submit-button");
 const expenseList = document.querySelector("#expense-list");
 
-const storageKey = "expense-tracker-expenses";
-let expenses = JSON.parse(localStorage.getItem(storageKey) || "[]");
+let expenses = [];
 let editingId = null;
-
-function saveExpenses() {
-	localStorage.setItem(storageKey, JSON.stringify(expenses));
-}
 
 function renderExpenses() {
 	expenseList.replaceChildren();
@@ -54,7 +49,6 @@ function startEditing(id) {
 function deleteExpense(id) {
 	expenses = expenses.filter((expense) => expense.id !== id);
 	if (editingId === id) clearInputs();
-	saveExpenses();
 	renderExpenses();
 }
 
@@ -71,7 +65,6 @@ submitButton.addEventListener("click", () => {
 		expenses = expenses.map((expense) => expense.id === editingId ? { ...expense, ...expenseData } : expense);
 	}
 
-	saveExpenses();
 	renderExpenses();
 	clearInputs();
 });
