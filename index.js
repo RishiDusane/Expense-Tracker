@@ -14,7 +14,7 @@ function createActionButton(label, action) {
 	button.addEventListener("click", action);
 	return button;
 }
-
+//
 function renderExpenses() {
 	expenseList.replaceChildren();
 
