@@ -1,0 +1,228 @@
+:root {
+	color-scheme: light;
+	--ink: #17212b;
+	--muted: #6d7782;
+	--paper: #fffdf8;
+	--surface: rgba(255, 255, 255, 0.9);
+	--line: #e5e1d8;
+	--accent: #e56b43;
+	--accent-dark: #b74727;
+	--mint: #d8eee2;
+	--shadow: 0 24px 60px rgba(48, 55, 45, 0.12);
+	font-family: Georgia, "Times New Roman", serif;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	background:
+		radial-gradient(circle at 12% 8%, rgba(229, 107, 67, 0.18), transparent 26rem),
+		radial-gradient(circle at 88% 92%, rgba(87, 157, 117, 0.16), transparent 28rem),
+		#f3f0e8;
+	color: var(--ink);
+}
+
+body::before {
+	content: "";
+	display: block;
+	height: 10px;
+	background: var(--accent);
+}
+
+body,
+input,
+select,
+button {
+	font-size: 1rem;
+}
+
+body {
+	padding: 4.5rem 1.25rem;
+}
+
+body > * {
+	max-width: 720px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+body::after {
+	content: "Spend with intention. Keep the small things visible.";
+	display: block;
+	max-width: 720px;
+	margin: 0 auto 1.75rem;
+	color: var(--muted);
+	font-size: 1rem;
+	font-style: italic;
+	letter-spacing: 0.02em;
+}
+
+h1 {
+	margin: 0 0 0.5rem;
+	font-size: clamp(2.7rem, 8vw, 5.2rem);
+	font-weight: 400;
+	line-height: 0.95;
+	letter-spacing: -0.04em;
+}
+
+label {
+	display: block;
+	margin: 1.3rem 0 0.45rem;
+	font-size: 0.88rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+input,
+select {
+	width: 100%;
+	border: 1px solid var(--line);
+	border-radius: 10px;
+	background: var(--surface);
+	padding: 0.9rem 1rem;
+	color: var(--ink);
+	font-family: inherit;
+	box-shadow: 0 4px 14px rgba(48, 55, 45, 0.04);
+}
+
+input:focus,
+select:focus,
+button:focus-visible {
+	outline: 3px solid rgba(229, 107, 67, 0.3);
+	outline-offset: 2px;
+}
+
+#amount {
+	font-size: 1.25rem;
+	font-weight: 700;
+}
+
+#submit-button {
+	margin-top: 1.8rem;
+	border: 0;
+	border-radius: 10px;
+	background: var(--accent);
+	padding: 0.95rem 1.4rem;
+	color: #fff;
+	font-family: inherit;
+	font-weight: 700;
+	cursor: pointer;
+	box-shadow: 0 10px 20px rgba(229, 107, 67, 0.22);
+	transition: transform 160ms ease, background 160ms ease;
+}
+
+#cancel-edit {
+	margin: 1.8rem 0 0 0.5rem;
+	border: 1px solid var(--line);
+	border-radius: 10px;
+	background: var(--surface);
+	padding: 0.95rem 1.4rem;
+	color: var(--ink);
+	font-family: inherit;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+#submit-button:hover {
+	background: var(--accent-dark);
+	transform: translateY(-2px);
+}
+
+#status {
+	min-height: 1.5rem;
+	margin-top: 1rem;
+	color: var(--muted);
+}
+
+#status.error {
+	color: var(--accent-dark);
+}
+
+#expense-list {
+	margin: 3rem 0 0;
+	padding: 1.2rem;
+	border: 1px solid var(--line);
+	border-radius: 14px;
+	background: var(--surface);
+	box-shadow: var(--shadow);
+	list-style: none;
+}
+
+#expense-list::before {
+	content: "Recent expenses";
+	display: block;
+	margin-bottom: 0.8rem;
+	color: var(--muted);
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+#expense-list:empty {
+	min-height: 5rem;
+}
+
+#expense-list:empty::after {
+	content: "Your expense list is ready for its first entry.";
+	display: block;
+	padding: 1rem 0 0.6rem;
+	color: var(--muted);
+	font-style: italic;
+}
+
+#expense-list li {
+	display: flex;
+	align-items: center;
+	gap: 0.7rem;
+	border-top: 1px solid var(--line);
+	padding: 1rem 0;
+	font-size: 1.05rem;
+	line-height: 1.4;
+}
+
+#expense-list li::first-letter {
+	color: var(--accent-dark);
+}
+
+#expense-list button {
+	border: 1px solid var(--line);
+	border-radius: 7px;
+	background: var(--paper);
+	padding: 0.5rem 0.7rem;
+	color: var(--ink);
+	font-family: inherit;
+	font-size: 0.8rem;
+	cursor: pointer;
+	transition: border-color 160ms ease, color 160ms ease, background 160ms ease;
+}
+
+#expense-list button:first-of-type {
+	margin-left: auto;
+}
+
+#expense-list button:hover {
+	border-color: var(--accent);
+	color: var(--accent-dark);
+	background: #fff5ef;
+}
+
+@media (max-width: 560px) {
+	body {
+		padding: 3rem 1rem;
+	}
+
+	#expense-list li {
+		align-items: flex-start;
+		flex-wrap: wrap;
+	}
+
+	#expense-list li button:first-of-type {
+		margin-left: 0;
+	}
+}
